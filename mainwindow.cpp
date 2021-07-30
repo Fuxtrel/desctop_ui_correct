@@ -3,68 +3,40 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     in_page = new InPage(this);
+    reg_page = new RegPage(this);
+    home_page = new HomePage(this);
 
-    {
-        stacked_widget = new QStackedWidget(this);
-        stacked_widget->setGeometry(0, 0, 1000, 1000);
-        stacked_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 
+    stacked_widget = new QStackedWidget(this);
+    stacked_widget->setGeometry(0, 0, 1000, 1000);
+    stacked_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    stacked_widget->addWidget(reg_page->getLinkBgRegPage());
+    stacked_widget->addWidget(in_page->getLinkBgInPage());
+    stacked_widget->addWidget(home_page->getLinkBgHomePage());
+
+    auto *bodyShadow = new CustomShadowEffect();
+    bodyShadow->setBlurRadius(20.0);
+    bodyShadow->setDistance(3.0);
+    bodyShadow->setColor(QColor(0, 0, 0, 80));
+
+    int count_effects = 2;
+    CustomShadowEffect *shadow[count_effects];
+    for (int i = 0; i < count_effects; i++) {
+        shadow[i] = new CustomShadowEffect();
+        shadow[i]->setBlurRadius(20.0);
+        shadow[i]->setDistance(3.0);
+        shadow[i]->setColor(QColor(0, 0, 0, 20));
     }
-    {
-        bg_reg_page = new QWidget(this);
-        bg_reg_page->setStyleSheet("background-color:white;");
 
-    }
-//    {
-//        bg_in_page = new QWidget(this);
-//        bg_in_page->setStyleSheet("background-color:white;");
-//
-//    }
-    {
-        bg_home_page = new QWidget(this);
-        bg_home_page->setStyleSheet("background-color:white;");
-
-    }
-    {
-        reg_page = new QWidget(bg_reg_page);
-        reg_page->setStyleSheet("background-color:green");
-        reg_page->setGeometry(300, 300, 300, 300);
-        reg_page->setFixedSize(1280, 780);
-    }
-//    {
-//        in_page = new QWidget(bg_in_page);
-//        in_page->setStyleSheet("background-color:blue;");
-//        in_page->setGeometry(300, 3000, 300, 300);
-//        in_page->setFixedSize(1280, 780);
-//    }
-    {
-        home_page = new QWidget(bg_home_page);
-        home_page->setStyleSheet("background-color:yellow;");
-        home_page->setGeometry(300, 3000, 300, 300);
-        home_page->setFixedSize(1280, 780);
-    }
-    {
-        reg_layout = new QGridLayout(bg_reg_page);
-        reg_layout->addWidget(reg_page, 1, 1, Qt::AlignCenter);
-        reg_page->show();
-
-//        in_layout = new QGridLayout(bg_in_page);
-//        in_layout->addWidget(in_page, 1, 1, Qt::AlignCenter);
-//        in_page->show();
-
-        home_layout = new QGridLayout(bg_home_page);
-        home_layout->addWidget(home_page, 1, 1, Qt::AlignCenter);
-        home_page->show();
-
-        stacked_widget->addWidget(bg_reg_page);
-        stacked_widget->addWidget(in_page->getLinkBgInPage());
-        stacked_widget->addWidget(bg_home_page);
-    }
+    in_page->getLinkBgEmailInputInPage()->setGraphicsEffect(shadow[0]);
+    in_page->getLinkBgPasswordInputInPage()->setGraphicsEffect(shadow[1]);
 
 
     stacked_widget->setCurrentIndex(1);
-    timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
+//    timer = new QTimer();
+//    connect(timer, SIGNAL(timeout()), this, SLOT(onTimeout()));
+//    timer->start(1000);
 }
 
 void MainWindow::on_but_clicked() {
@@ -73,8 +45,11 @@ void MainWindow::on_but_clicked() {
 }
 
 void MainWindow::onTimeout() {
-
-    stacked_widget->setCurrentIndex(0);
+    i++;
+    stacked_widget->setCurrentIndex(i);
+    if(i == 2){
+        timer->stop();
+    }
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event) {

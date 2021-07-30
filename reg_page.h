@@ -12,11 +12,11 @@ class RegPage {
 public:
     RegPage(QWidget *parent = nullptr);
     ~RegPage() = default;
-    QWidget* getLinkBgInPage();
+    QWidget* getLinkBgRegPage();
 private:
-    QWidget *bg_in_page;
-    QWidget *in_page;
-    QGridLayout *in_layout;
+    QWidget *bg_reg_page;
+    QWidget *reg_page;
+    QGridLayout *reg_layout;
 };
 
 #endif //DESCTOP_NORM_REG_PAGE_H

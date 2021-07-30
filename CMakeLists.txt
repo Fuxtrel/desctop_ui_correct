@@ -14,7 +14,21 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(desctop_norm main.cpp mainwindow.cpp mainwindow.h in_page.cpp in_page.h reg_page.cpp reg_page.h)
+add_executable(desctop_norm
+        main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        in_page.cpp
+        in_page.h
+        reg_page.cpp
+        reg_page.h
+        home_page.cpp
+        home_page.h
+        customshadoweffect.cpp
+        customshadoweffect.h
+        round_graph.cpp
+        round_graph.h
+        )
 target_link_libraries(desctop_norm
         Qt5::Core
         Qt5::Gui

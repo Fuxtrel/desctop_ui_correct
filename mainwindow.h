@@ -11,6 +11,10 @@
 #include <QLabel>
 #include <QtSvg/QtSvg>
 #include "in_page.h"
+#include "reg_page.h"
+#include "home_page.h"
+#include "customshadoweffect.h"
+#include "round_graph.h"
 
 
 class MainWindow : public QMainWindow{
@@ -22,27 +26,11 @@ public:
 private:
     QStackedWidget *stacked_widget;
 
-    QWidget *bg_reg_page;
-//    QWidget *bg_in_page;
-    QWidget *bg_home_page;
-
-    QWidget *reg_page;
-//    QWidget *in_page;
-    QWidget *home_page;
-
     QTimer *timer;
-    QGridLayout *reg_layout;
-    QGridLayout *home_layout;
-
-    QLabel *left_title_in_page;
-    QLabel *right_title_in_page;
-    QLabel *right_subtitle_in_page;
-
-    QSvgWidget *left_circle_title_in_page;
-    QSvgWidget *left_separator_in_page;
-    QPushButton *check_box_in_page;
-
     InPage *in_page;
+    RegPage *reg_page;
+    HomePage *home_page;
+    int i = 0;
 
 private slots:
     void on_but_clicked();
