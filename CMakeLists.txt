@@ -12,6 +12,7 @@ find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
+        Svg
         REQUIRED)
 
 add_executable(desctop_norm
@@ -33,5 +34,6 @@ target_link_libraries(desctop_norm
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        Qt5::Svg
         )
 
