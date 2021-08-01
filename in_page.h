@@ -6,6 +6,9 @@
 #include <QResizeEvent>
 #include <QLabel>
 #include <QtSvg/QtSvg>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 
 class InPage : public QObject{
@@ -45,6 +48,7 @@ private slots:
     void on_check_box_in_page_clicked();
     void on_forget_password_clicked();
     void on_hide_password_clicked();
+    void on_sign_in_clicked();
 
 };
 

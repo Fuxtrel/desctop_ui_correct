@@ -85,7 +85,7 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
 
     QIcon hide_password_off;
     hide_password_off.addFile(QString::fromUtf8("../pictures/in_page/eye_.svg"), QSize(), QIcon::Normal,
-                           QIcon::On);
+                              QIcon::On);
     hide_password->setIconSize(QSize(32, 32));
     hide_password->setIcon(hide_password_off);
     hide_password->setAutoFillBackground(true);
@@ -113,6 +113,7 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
     sign_in->setGeometry(193, 650, 333, 60);
     sign_in->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;");
     sign_in->setText("Войти");
+    connect(sign_in, &QPushButton::clicked, this, &InPage::on_sign_in_clicked);
 
     registration = new QPushButton(in_page);
     registration->setGeometry(833, 650, 333, 60);
@@ -142,7 +143,7 @@ void InPage::on_hide_password_clicked() {
         icon.addFile(QString::fromUtf8("../pictures/in_page/eye.svg"), QSize(), QIcon::Normal, QIcon::On);
         hide_password_in_page_state = true;
         password_input->setEchoMode(QLineEdit::Normal);
-    } else if(hide_password_in_page_state){
+    } else if (hide_password_in_page_state) {
         icon.addFile(QString::fromUtf8("../pictures/in_page/eye_.svg"), QSize(), QIcon::Normal, QIcon::On);
         hide_password_in_page_state = false;
         password_input->setEchoMode(QLineEdit::Password);
@@ -152,6 +153,32 @@ void InPage::on_hide_password_clicked() {
 
 void InPage::on_forget_password_clicked() {
     stacked_widget->setCurrentIndex(3);
+}
+
+void InPage::on_sign_in_clicked() {
+    QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
+    const QUrl url(QStringLiteral("https://upstorage.net/api/auth/sign-in"));
+    QNetworkRequest request(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QJsonObject obj;
+    obj["email"] = "a99som@rambler.ru";
+    obj["password"] = "1234";
+    obj["invitationToken"] = "";
+    obj["tenantId"] = "";
+    QJsonDocument doc(obj);
+    QByteArray data = doc.toJson();
+    QNetworkReply *reply = mgr->post(request, data);
+
+    QObject::connect(reply, &QNetworkReply::finished, [=]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QString contents = QString::fromUtf8(reply->readAll());
+            qDebug() << contents;
+        } else {
+            QString err = reply->errorString();
+            qDebug() << err;
+        }
+        reply->deleteLater();
+    });
 }
 
 
