@@ -11,18 +11,23 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
     in_page->setStyleSheet("border:0px;border-radius:15px");
     in_layout = new QGridLayout(bg_in_page);
     in_layout->addWidget(in_page, 1, 1, Qt::AlignCenter);
+    in_layout->setMargin(0);
 
-    left_circle_title_in_page = new QSvgWidget(in_page);
-    left_circle_title_in_page->setGeometry(0, 0, 1280, 780);
-    left_circle_title_in_page->setStyleSheet("border:0px");
-    left_circle_title_in_page->load(QString("../pictures/in_page/bg_in.svg"));
+    bg_in = new QSvgWidget(in_page);
+    bg_in->setGeometry(0, 0, 1280, 780);
+    bg_in->setStyleSheet("border:0px");
+    bg_in->load(QString("../pictures/in_page/bg_in.svg"));
 
+    left_separator_in_page = new QSvgWidget(in_page);
+    left_separator_in_page->setGeometry(120, 459, 480, 27);
+    left_separator_in_page->setStyleSheet("border:0px;background-color:white;");
+    left_separator_in_page->load(QString("../pictures/in_page/separator.svg"));
 
     left_title_in_page = new QLabel(in_page);
     left_title_in_page->setGeometry(180, 150, 361, 44);
     left_title_in_page->setAlignment(Qt::AlignCenter);
     left_title_in_page->setText("Вход в учётную запись");
-    left_title_in_page->setStyleSheet("color:#7D7D7D;");
+    left_title_in_page->setStyleSheet("color:#7D7D7D;background-color:white;");
 
     //Ввод емейла в действительное поле
     width_input_fields = 480;
@@ -67,12 +72,12 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
     remember_me = new QLabel(in_page);
     remember_me->setGeometry(150, 404, 165, 27);
     remember_me->setText("Запомнить меня");
-    remember_me->setStyleSheet("color:#7D7D7D;");
+    remember_me->setStyleSheet("color:#7D7D7D;background-color:white;");
 
     forget_password = new QPushButton(in_page);
     forget_password->setGeometry(454, 404, 146, 25);
     forget_password->setText("Забыли пароль?");
-    forget_password->setStyleSheet("border:0px;text-decoration: underline;color:#7D7D7D;");
+    forget_password->setStyleSheet("border:0px;text-decoration: underline;color:#7D7D7D;background-color:white;");
     connect(forget_password, &QPushButton::clicked, this, &InPage::on_forget_password_clicked);
 
     hide_password = new QPushButton(in_page);
@@ -109,7 +114,10 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
     sign_in->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;");
     sign_in->setText("Войти");
 
-
+    registration = new QPushButton(in_page);
+    registration->setGeometry(833, 650, 333, 60);
+    registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
+    registration->setText("Зарегистироваться");
 
 
 }

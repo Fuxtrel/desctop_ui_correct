@@ -30,10 +30,8 @@ private:
     QLineEdit *email_input;
     QLineEdit *password_input;
     QLabel *left_title_in_page;
-    QLabel *right_title_in_page;
-    QLabel *right_subtitle_in_page;
     QLabel *remember_me;
-    QSvgWidget *left_circle_title_in_page;
+    QSvgWidget *bg_in;
     QSvgWidget *left_separator_in_page;
     QPushButton *forget_password;
     int width_input_fields;
@@ -41,7 +39,7 @@ private:
     QPushButton *hide_password;
     bool check_box_in_page_state;
     bool hide_password_in_page_state;
-
+    QPushButton *registration;
 
 private slots:
     void on_check_box_in_page_clicked();
