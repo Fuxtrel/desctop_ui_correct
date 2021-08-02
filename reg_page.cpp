@@ -33,7 +33,7 @@ RegPage::RegPage(QWidget *parent, QStackedWidget *stacked_widget) {
     fio_input->setPlaceholderText(QCoreApplication::translate("MainWindow", "Имя пользователя", nullptr));
     fio_input->setStyleSheet("background-color: white;border:0px;");
     fio_input->setFrame(false);
-    connect(fio_input, &QLineEdit::editingFinished, this, &RegPage::on_fio_input_edit);
+    connect(fio_input, &QLineEdit::textChanged, this, &RegPage::on_fio_input_edit);
 
     bg_email_input = new QLabel(reg_page);
     bg_email_input->setGeometry(QRect(680, 320, width_input_fields, height_input_fields));
@@ -46,7 +46,7 @@ RegPage::RegPage(QWidget *parent, QStackedWidget *stacked_widget) {
     email_input->setPlaceholderText(QCoreApplication::translate("MainWindow", "Email", nullptr));
     email_input->setStyleSheet("background-color: white;border-color: rgba(0,0,0,0);");
     email_input->setFrame(false);
-    connect(email_input, &QLineEdit::editingFinished, this, &RegPage::on_email_input_edit);
+    connect(email_input, &QLineEdit::textChanged, this, &RegPage::on_email_input_edit);
 
     bg_password_input = new QLabel(reg_page);
     bg_password_input->setGeometry(QRect(680, 400, width_input_fields, height_input_fields));
@@ -60,7 +60,7 @@ RegPage::RegPage(QWidget *parent, QStackedWidget *stacked_widget) {
     password_input->setStyleSheet("background-color: white;border-color: rgba(0,0,0,0);");
     password_input->setEchoMode(QLineEdit::Password);
     password_input->setFrame(false);
-    connect(password_input, &QLineEdit::editingFinished, this, &RegPage::on_password_input_edit);
+    connect(password_input, &QLineEdit::textChanged, this, &RegPage::on_password_input_edit);
 
     check_box_reg_page_state = false;
     check_box_reg_page = new QPushButton(reg_page);
@@ -182,7 +182,9 @@ void RegPage::on_registration_clicked() {
     }
     if(check_fields.isFioEmailPasswordCorrect() == "000"){
         registration->setDisabled(false);
-        registration->setStyleSheet("border:0px;border-radius:15px;color:background:#64AEEA;");
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
+    }else{
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;;");
     }
 }
 
@@ -198,7 +200,7 @@ void RegPage::on_password_input_edit() {
     }
     if(check_fields.isFioEmailPasswordCorrect() == "000"){
         registration->setDisabled(false);
-        registration->setStyleSheet("border:0px;border-radius:15px;color:background:#64AEEA;");
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
     }
 }
 
@@ -214,7 +216,7 @@ void RegPage::on_email_input_edit() {
     }
     if(check_fields.isFioEmailPasswordCorrect() == "000"){
         registration->setDisabled(false);
-        registration->setStyleSheet("border:0px;border-radius:15px;color:background:#64AEEA;");
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
     }
 }
 
@@ -230,6 +232,6 @@ void RegPage::on_fio_input_edit() {
     }
     if(check_fields.isFioEmailPasswordCorrect() == "000"){
         registration->setDisabled(false);
-        registration->setStyleSheet("border:0px;border-radius:15px;color:background:#64AEEA;");
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
     }
 }

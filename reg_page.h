@@ -40,7 +40,7 @@ private:
     QSvgWidget *warning_fio;
     QSvgWidget *warning_email;
     QSvgWidget *warning_password;
-
+    QString fio, email, password;
 
 
 private slots:

@@ -113,8 +113,8 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
     sign_in->setText("Войти");
     sign_in->setDisabled(true);
     connect(sign_in, &QPushButton::clicked, this, &InPage::on_sign_in_clicked);
-    connect(password_input, &QLineEdit::editingFinished, this, &InPage::on_password_input_edit);
-    connect(email_input, &QLineEdit::editingFinished, this, &InPage::on_email_input_edit);
+    connect(password_input, &QLineEdit::textChanged, this, &InPage::on_password_input_edit);
+    connect(email_input, &QLineEdit::textChanged, this, &InPage::on_email_input_edit);
 
     registration = new QPushButton(in_page);
     registration->setGeometry(833, 650, 333, 60);
