@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     bodyShadow->setDistance(3.0);
     bodyShadow->setColor(QColor(0, 0, 0, 80));
 
-    int count_effects = 7;
+    int count_effects = 13;
     CustomShadowEffect *shadow[count_effects];
     for (int i = 0; i < count_effects; i++) {
         shadow[i] = new CustomShadowEffect();
@@ -36,6 +36,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     in_page->google->setGraphicsEffect(shadow[4]);
     in_page->sign_in->setGraphicsEffect(shadow[5]);
     in_page->in_page->setGraphicsEffect(shadow[6]);
+    reg_page->reg_page->setGraphicsEffect(shadow[7]);
+    reg_page->bg_fio_input->setGraphicsEffect(shadow[8]);
+    reg_page->bg_email_input->setGraphicsEffect(shadow[9]);
+    reg_page->bg_password_input->setGraphicsEffect(shadow[10]);
+    reg_page->check_box_reg_page->setGraphicsEffect(shadow[11]);
+    reg_page->registration->setGraphicsEffect(shadow[12]);
 
     stacked_widget->setCurrentIndex(1);
 //    timer = new QTimer();

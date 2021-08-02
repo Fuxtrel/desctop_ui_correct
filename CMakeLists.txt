@@ -30,7 +30,7 @@ add_executable(desctop_norm
         customshadoweffect.h
         round_graph.cpp
         round_graph.h
-        )
+        check_fields.cpp check_fields.h)
 target_link_libraries(desctop_norm
         Qt5::Core
         Qt5::Gui
