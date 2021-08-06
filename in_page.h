@@ -9,12 +9,17 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include "check_fields.h"
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include "round_graph.h"
 
 
 class InPage : public QObject{
     Q_OBJECT
 public:
-    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr);
+    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr, fux::RoundGraph *rg = nullptr, fux::RoundGraph *rg_ = nullptr);
     ~InPage() = default;
 
     QWidget *in_page;
@@ -27,7 +32,8 @@ public:
     QPushButton *sign_in;
 
 private:
-
+    fux::RoundGraph *rg;
+    fux::RoundGraph *rg_;
     QStackedWidget* stacked_widget;
     QGridLayout *in_layout;
     QLineEdit *email_input;
@@ -43,13 +49,20 @@ private:
     bool check_box_in_page_state;
     bool hide_password_in_page_state;
     QPushButton *registration;
+    QString email;
+    QString password;
+    QSvgWidget *warning;
+    QLabel *warning_text;
+
 
 private slots:
     void on_check_box_in_page_clicked();
     void on_forget_password_clicked();
     void on_hide_password_clicked();
     void on_sign_in_clicked();
-
+    void on_password_input_edit();
+    void on_email_input_edit();
+    void on_registration_clicked();
 };
 
 

@@ -6,17 +6,56 @@
 #include <QResizeEvent>
 #include <QLabel>
 #include <QtSvg/QtSvg>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include "check_fields.h"
 
-class RegPage {
-
+class RegPage : public QObject{
+    Q_OBJECT
 public:
-    RegPage(QWidget *parent = nullptr);
+    RegPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr);
     ~RegPage() = default;
     QWidget* getLinkBgRegPage();
-private:
-    QWidget *bg_reg_page;
     QWidget *reg_page;
+    QLabel *bg_email_input;
+    QLabel *bg_password_input;
+    QLabel *bg_fio_input;
+    QPushButton *check_box_reg_page;
+    QPushButton *registration;
+private:
+    QStackedWidget* stacked_widget;
+    QWidget *bg_reg_page;
     QGridLayout *reg_layout;
+    QLabel *right_title;
+    QLineEdit *email_input;
+    QLineEdit *password_input;
+    QLineEdit *fio_input;
+    int width_input_fields;
+    int height_input_fields;
+    QPushButton *hide_password;
+    bool check_box_reg_page_state;
+    bool hide_password_reg_page_state;
+
+    QLabel *warning_fio_text;
+    QLabel *warning_email_text;
+    QLabel *warning_password_text;
+    QSvgWidget *warning_fio;
+    QSvgWidget *warning_email;
+    QSvgWidget *warning_password;
+    QString fio, email, password;
+    QSvgWidget *bg_left_reg;
+    QLabel *left_title;
+    QSvgWidget *left_icon;
+    QPushButton *sign_in;
+
+private slots:
+    void on_check_box_reg_page_clicked();
+    void on_hide_password_clicked();
+    void on_registration_clicked();
+    void on_password_input_edit();
+    void on_email_input_edit();
+    void on_fio_input_edit();
+    void on_sign_in_clicked();
 };
 
 #endif //DESCTOP_NORM_REG_PAGE_H
