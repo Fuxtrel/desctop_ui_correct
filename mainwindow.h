@@ -30,6 +30,8 @@ private:
     InPage *in_page;
     RegPage *reg_page;
     HomePage *home_page;
+    fux::RoundGraph *rg;
+    fux::RoundGraph *rg_;
     int i = 0;
 
 private slots:

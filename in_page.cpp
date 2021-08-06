@@ -1,6 +1,6 @@
 #include "in_page.h"
 
-InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget) {
+InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget, fux::RoundGraph *rg, fux::RoundGraph *rg_):rg(rg), rg_(rg_) {
     this->stacked_widget = stacked_widget;
     bg_in_page = new QWidget(parent);
     bg_in_page->setStyleSheet("background-color:#F7F9FB;");
@@ -218,28 +218,34 @@ void InPage::on_sign_in_clicked() {
                 qDebug() << "Файл для записи личных данных уже открыт";
             }
         }
+
         /*QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
         const QUrl url(QStringLiteral("https://upstorage.net/api/auth/sign-in"));
         QNetworkRequest request(url);
         request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
         QJsonObject obj;
-        obj["email"] = "a99som@rambler.ru";
-        obj["password"] = "1234";
+        obj["email"] = email;
+        obj["password"] = password;
         obj["invitationToken"] = "";
         obj["tenantId"] = "";
         QJsonDocument document(obj);
-        QByteArray data_ = doc.toJson();
+        QByteArray data_ = document.toJson();
         QNetworkReply *reply = mgr->post(request, data_);
         QObject::connect(reply, &QNetworkReply::finished, [=]() {
             if (reply->error() == QNetworkReply::NoError) {
                 QString contents = QString::fromUtf8(reply->readAll());
                 qDebug() << contents;
             } else {
+                QString contents = QString::fromUtf8(reply->readAll());
                 QString err = reply->errorString();
                 qDebug() << err;
             }
             reply->deleteLater();
         });*/
+        rg->setLoadPercent(0);
+        rg_->setLoadPercent(0);
+        rg->setLoadPercent(50);
+        rg_->setLoadPercent(25);
         stacked_widget->setCurrentIndex(2);
     } else if((check_fields.isEmailPasswordCorrect() == 1) || (check_fields.isEmailPasswordCorrect() == 2) || (check_fields.isEmailPasswordCorrect() == 3)){
         warning = new QSvgWidget(in_page);

@@ -7,13 +7,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     stacked_widget->setGeometry(0, 0, 1000, 1000);
     stacked_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 
-    in_page = new InPage(this, stacked_widget);
-    reg_page = new RegPage(this);
-    home_page = new HomePage(this);
+    home_page = new HomePage(this, stacked_widget);
+    rg = new fux::RoundGraph(143, 89, 160, 10, QBrush(QColor::fromRgb(134, 143, 255)), QBrush(Qt::white), home_page->top_block);
+    rg_ = new fux::RoundGraph(343, 89, 160, 10, QBrush(QColor::fromRgb(89, 215, 171)), QBrush(Qt::white), home_page->top_block);
+    in_page = new InPage(this, stacked_widget, rg, rg_);
+    reg_page = new RegPage(this, stacked_widget);
 
     stacked_widget->addWidget(reg_page->getLinkBgRegPage());
     stacked_widget->addWidget(in_page->bg_in_page);
-    stacked_widget->addWidget(home_page->getLinkBgHomePage());
+    stacked_widget->addWidget(home_page->bg_home_page);
 
     auto *bodyShadow = new CustomShadowEffect();
     bodyShadow->setBlurRadius(20.0);
@@ -64,6 +66,13 @@ void MainWindow::onTimeout() {
 
 void MainWindow::resizeEvent(QResizeEvent *event) {
     QWidget::resizeEvent(event);
-    QPoint null_point(0, 0);
     stacked_widget->resize(event->size().width(), event->size().height());
+    switch(stacked_widget->currentIndex()){
+        case 2:
+            setMinimumSize(1380, 944);
+            break;
+        default:
+            setMinimumSize(1280, 780);
+            break;
+    }
 }

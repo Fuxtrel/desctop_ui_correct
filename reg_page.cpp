@@ -118,9 +118,31 @@ RegPage::RegPage(QWidget *parent, QStackedWidget *stacked_widget) {
 
     registration = new QPushButton(reg_page);
     registration->setGeometry(755, 650, 330, 60);
-    registration->setStyleSheet("border:0px;border-radius:15px;color:background:#C4C4C4;");
+    registration->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;background-color:white;");
     registration->setText("Зарегистрироваться");
     connect(registration, &QPushButton::clicked, this, &RegPage::on_registration_clicked);
+
+    bg_left_reg = new QSvgWidget(reg_page);
+    bg_left_reg->setGeometry(0, 0, 560, 780);
+    bg_left_reg->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0);");
+    bg_left_reg->load(QString("../pictures/reg_page/bg_reg.svg"));
+
+    left_title = new QLabel(reg_page);
+    left_title->setGeometry(138, 125, 285, 44);
+    left_title->setText("Уже есть аккаунт?");
+    left_title->setAlignment(Qt::AlignCenter);
+    left_title->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0); color:white;");
+
+    left_icon = new QSvgWidget(reg_page);
+    left_icon->setGeometry(25, 25, 185, 46);
+    left_icon->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0);");
+    left_icon->load(QString("../pictures/reg_page/logo.svg"));
+
+    sign_in = new QPushButton(reg_page);
+    sign_in->setGeometry(115, 650, 330, 60);
+    sign_in->setText("Войти");
+    sign_in->setStyleSheet("border:0px;border-radius:15px;background-color:white;color:#64AEEA;");
+    connect(sign_in, &QPushButton::clicked, this, &RegPage::on_sign_in_clicked);
 
 }
 
@@ -140,6 +162,11 @@ void RegPage::on_check_box_reg_page_clicked() {
         check_box_reg_page_state = false;
         check_box_reg_page->setIcon(check_point_off);
     }
+    CheckFields check_fields(fio_input, email_input, password_input);
+    if(check_fields.isFioEmailPasswordCorrect() == "000" && check_box_reg_page_state){
+        registration->setDisabled(false);
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
+    }
 }
 
 void RegPage::on_hide_password_clicked() {
@@ -158,13 +185,13 @@ void RegPage::on_hide_password_clicked() {
 
 void RegPage::on_registration_clicked() {
     CheckFields check_fields(fio_input, email_input, password_input);
-    qDebug() << check_fields.isFioEmailPasswordCorrect();
     if(check_fields.isFioEmailPasswordCorrect()[0] == '0'){
         warning_fio->hide();
         warning_fio_text->hide();
     } else {
         warning_fio->show();
         warning_fio_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;");
     }
     if(check_fields.isFioEmailPasswordCorrect()[1] == '0'){
         warning_email->hide();
@@ -172,33 +199,60 @@ void RegPage::on_registration_clicked() {
     }else{
         warning_email->show();
         warning_email_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;");
     }
-    if(check_fields.isFioEmailPasswordCorrect()[1] == '0'){
-        warning_password->hide();
-        warning_password_text->hide();
-    }else{
-        warning_password->show();
-        warning_password_text->show();
-    }
-    if(check_fields.isFioEmailPasswordCorrect() == "000"){
-        registration->setDisabled(false);
-        registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
-    }else{
-        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;;");
-    }
-}
-
-void RegPage::on_password_input_edit() {
-    CheckFields check_fields(fio_input, email_input, password_input);
-    qDebug() << check_fields.isFioEmailPasswordCorrect();
     if(check_fields.isFioEmailPasswordCorrect()[2] == '0'){
         warning_password->hide();
         warning_password_text->hide();
     }else{
         warning_password->show();
         warning_password_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;");
     }
-    if(check_fields.isFioEmailPasswordCorrect() == "000"){
+    if(check_fields.isFioEmailPasswordCorrect() == "000" && check_box_reg_page_state){
+        email = email_input->text();
+        fio = fio_input->text();
+        password = password_input->text();
+        QNetworkAccessManager *mgr = new QNetworkAccessManager(this);
+        const QUrl url(QStringLiteral("https://upstorage.net/api/auth/sign-up"));
+        QNetworkRequest request(url);
+        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+        QJsonObject obj;
+        obj["email"] = email;
+        obj["password"] = password;
+        obj["invitationToken"] = "";
+        obj["tenantId"] = "";
+        QJsonDocument document(obj);
+        QByteArray data_ = document.toJson();
+        QNetworkReply *reply = mgr->post(request, data_);
+        QObject::connect(reply, &QNetworkReply::finished, [=]() {
+            if (reply->error() == QNetworkReply::NoError) {
+                QString contents = QString::fromUtf8(reply->readAll());
+                qDebug() << contents;
+            } else {
+                QString err = reply->errorString();
+                QString contents = QString::fromUtf8(reply->readAll());
+                qDebug() << err;
+            }
+            reply->deleteLater();
+        });
+
+    }else{
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#C4C4C4;");
+    }
+}
+
+void RegPage::on_password_input_edit() {
+    CheckFields check_fields(fio_input, email_input, password_input);
+    if(check_fields.isFioEmailPasswordCorrect()[2] == '0'){
+        warning_password->hide();
+        warning_password_text->hide();
+    }else{
+        warning_password->show();
+        warning_password_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;background-color:white;");
+    }
+    if(check_fields.isFioEmailPasswordCorrect() == "000" && check_box_reg_page_state){
         registration->setDisabled(false);
         registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
     }
@@ -206,15 +260,15 @@ void RegPage::on_password_input_edit() {
 
 void RegPage::on_email_input_edit() {
     CheckFields check_fields(fio_input, email_input, password_input);
-    qDebug() << check_fields.isFioEmailPasswordCorrect();
     if(check_fields.isFioEmailPasswordCorrect()[1] == '0'){
         warning_email->hide();
         warning_email_text->hide();
     }else{
         warning_email->show();
         warning_email_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;background-color:white;");
     }
-    if(check_fields.isFioEmailPasswordCorrect() == "000"){
+    if(check_fields.isFioEmailPasswordCorrect() == "000" && check_box_reg_page_state){
         registration->setDisabled(false);
         registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
     }
@@ -222,16 +276,20 @@ void RegPage::on_email_input_edit() {
 
 void RegPage::on_fio_input_edit() {
     CheckFields check_fields(fio_input, email_input, password_input);
-    qDebug() << check_fields.isFioEmailPasswordCorrect();
     if(check_fields.isFioEmailPasswordCorrect()[0] == '0'){
         warning_fio->hide();
         warning_fio_text->hide();
     } else {
         warning_fio->show();
         warning_fio_text->show();
+        registration->setStyleSheet("border:0px;border-radius:15px;color:#7D7D7D;background-color:white;");
     }
-    if(check_fields.isFioEmailPasswordCorrect() == "000"){
-        registration->setDisabled(false);
+    if(check_fields.isFioEmailPasswordCorrect() == "000" && check_box_reg_page_state){
         registration->setStyleSheet("border:0px;border-radius:15px;color:#64AEEA;");
+        registration->setDisabled(false);
     }
+}
+
+void RegPage::on_sign_in_clicked() {
+    stacked_widget->setCurrentIndex(1);
 }

@@ -13,12 +13,13 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "round_graph.h"
 
 
 class InPage : public QObject{
     Q_OBJECT
 public:
-    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr);
+    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr, fux::RoundGraph *rg = nullptr, fux::RoundGraph *rg_ = nullptr);
     ~InPage() = default;
 
     QWidget *in_page;
@@ -31,7 +32,8 @@ public:
     QPushButton *sign_in;
 
 private:
-
+    fux::RoundGraph *rg;
+    fux::RoundGraph *rg_;
     QStackedWidget* stacked_widget;
     QGridLayout *in_layout;
     QLineEdit *email_input;

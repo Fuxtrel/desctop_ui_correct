@@ -6,6 +6,8 @@
 #include <QResizeEvent>
 #include <QLabel>
 #include <QtSvg/QtSvg>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 #include "check_fields.h"
 
 class RegPage : public QObject{
@@ -41,7 +43,10 @@ private:
     QSvgWidget *warning_email;
     QSvgWidget *warning_password;
     QString fio, email, password;
-
+    QSvgWidget *bg_left_reg;
+    QLabel *left_title;
+    QSvgWidget *left_icon;
+    QPushButton *sign_in;
 
 private slots:
     void on_check_box_reg_page_clicked();
@@ -50,6 +55,7 @@ private slots:
     void on_password_input_edit();
     void on_email_input_edit();
     void on_fio_input_edit();
+    void on_sign_in_clicked();
 };
 
 #endif //DESCTOP_NORM_REG_PAGE_H
