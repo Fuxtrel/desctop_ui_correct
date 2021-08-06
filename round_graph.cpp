@@ -24,6 +24,7 @@ fux::RoundGraph::RoundGraph(const double rectangle_x, const double rectangle_y, 
     circle_end->setTransformOriginPoint((diameter / 2), (diameter / 2));
     circle->setTransformOriginPoint(rectangle_x + (diameter / 2), rectangle_y + (diameter / 2));
     circle->setStartAngle(90 * 16);
+    circle->setSpanAngle(0);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     bg->setPen(Qt::NoPen);
@@ -46,11 +47,12 @@ fux::RoundGraph::RoundGraph(const double rectangle_x, const double rectangle_y, 
     view->setFrameShape(QFrame::NoFrame);
     timer = new QTimer();
     connect(timer, &QTimer::timeout, this, &RoundGraph::onTimeout);
+
     display_place = new QLabel(parent);
     display_place->setGeometry(rectangle_x + (diameter / 2) - 30, rectangle_y + (diameter / 2) - 10, 60, 20);
     display_place->setText(QString::number(getAngle() / 3.6) + " %");
     display_place->setAlignment(Qt::AlignCenter);
-    view->show();
+    display_place->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0);");
 
 }
 
@@ -91,7 +93,7 @@ void fux::RoundGraph::setLoadPercent(int percent) {
 
 void fux::RoundGraph::onTimeout() {
     start_angle -= delta_angle;
-    display_place->setText(QString::number(getAngle() / 3.6) + " %");
+    display_place->setText(QString::number(-int(start_angle / 16 / 3.6)) + " %");
     circle_end->setRotation(-start_angle / 16 -1);
     circle->setSpanAngle(start_angle);
     if(start_angle <= -angle){

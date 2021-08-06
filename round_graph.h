@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QLabel>
+#include <QGraphicsTextItem>
 
 
 namespace fux {

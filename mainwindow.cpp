@@ -9,8 +9,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     home_page = new HomePage(this, stacked_widget);
     rg = new fux::RoundGraph(143, 89, 160, 10, QBrush(QColor::fromRgb(134, 143, 255)), QBrush(Qt::white), home_page->top_block);
+    rg__ = new fux::RoundGraph(543, 89, 160, 10, QBrush(QColor::fromRgb(134, 143, 255)), QBrush(Qt::white), home_page->top_block);
     rg_ = new fux::RoundGraph(343, 89, 160, 10, QBrush(QColor::fromRgb(89, 215, 171)), QBrush(Qt::white), home_page->top_block);
-    in_page = new InPage(this, stacked_widget, rg, rg_);
+    in_page = new InPage(this, stacked_widget, rg, rg_, rg__);
     reg_page = new RegPage(this, stacked_widget);
 
     stacked_widget->addWidget(reg_page->getLinkBgRegPage());
