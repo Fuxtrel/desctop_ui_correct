@@ -19,7 +19,7 @@
 class InPage : public QObject{
     Q_OBJECT
 public:
-    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr, fux::RoundGraph *rg = nullptr, fux::RoundGraph *rg_ = nullptr, fux::RoundGraph *rg__ = nullptr);
+    InPage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr, fux::RoundGraph *rg = nullptr, fux::RoundGraph *rg_ = nullptr);
     ~InPage() = default;
 
     QWidget *in_page;
@@ -34,7 +34,6 @@ public:
 private:
     fux::RoundGraph *rg;
     fux::RoundGraph *rg_;
-    fux::RoundGraph *rg__;
     QStackedWidget* stacked_widget;
     QGridLayout *in_layout;
     QLineEdit *email_input;

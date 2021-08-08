@@ -1,6 +1,6 @@
 #include "in_page.h"
 
-InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget, fux::RoundGraph *rg, fux::RoundGraph *rg_, fux::RoundGraph *rg__):rg(rg), rg_(rg_), rg__(rg__) {
+InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget, fux::RoundGraph *rg, fux::RoundGraph *rg_):rg(rg), rg_(rg_) {
     this->stacked_widget = stacked_widget;
     bg_in_page = new QWidget(parent);
     bg_in_page->setStyleSheet("background-color:#F7F9FB;");
@@ -244,10 +244,8 @@ void InPage::on_sign_in_clicked() {
         });*/
         rg->setLoadPercent(0);
         rg_->setLoadPercent(0);
-        rg__->setLoadPercent(0);
         rg->setLoadPercent(90);
         rg_->setLoadPercent(100);
-        rg__->setLoadPercent(90);
         stacked_widget->setCurrentIndex(2);
     } else if((check_fields.isEmailPasswordCorrect() == 1) || (check_fields.isEmailPasswordCorrect() == 2) || (check_fields.isEmailPasswordCorrect() == 3)){
         warning = new QSvgWidget(in_page);
