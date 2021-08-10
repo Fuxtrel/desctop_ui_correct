@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QtSvg/QtSvg>
 #include <QProgressBar>
+#include <QScrollArea>
 
 class HomePage : public QObject {
 Q_OBJECT
@@ -18,16 +19,16 @@ public:
 
     void setUsingSpace(size_t space);
 
-
     QWidget *bg_home_page;
     QWidget *top_block;
     QLabel *space_load;
     QProgressBar *bottom_progress_bar;
     QLabel *out_name_surname;
     QLabel *out_email;
+    QStackedWidget *stacked_widget_home;
+    QWidget *template_bg;
+
 private:
-    QGraphicsDropShadowEffect *effect;
-    QStackedWidget *stacked_widget;
     QWidget *home_page;
     QGridLayout *home_layout;
     QWidget *left_buttons_group;
@@ -37,7 +38,7 @@ private:
     bool buttons_state[8] = {false};
     QSvgWidget *separator_b;
     QLabel *last_files;
-    QStackedWidget *stacked_widget_home;
+    QStackedWidget *stacked_widget;
     QWidget *info_page;
     QLabel *place_on_your;
     QLabel *rent_place;
@@ -71,6 +72,12 @@ private:
     QLabel *from;
     QLabel *full_right_gb;
     QProgressBar *right_progress_bar[4];
+    QLabel *right_names[4];
+    QPushButton *right_buttons[4];
+
+
+    QGridLayout *template_bg_layout;
+    QWidget *files_page;
 
 
     void setButtonsDefault();
@@ -84,6 +91,7 @@ private slots:
     void on_command_link_button_5_push();
     void on_command_link_button_6_push();
     void on_command_link_button_7_push();
+    void on_files_button_clicked();
 };
 
 

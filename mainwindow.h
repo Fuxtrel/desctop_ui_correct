@@ -32,7 +32,6 @@ private:
     HomePage *home_page;
     fux::RoundGraph *rg;
     fux::RoundGraph *rg_;
-    fux::RoundGraph *rg__;
     int i = 0;
 
 private slots:
