@@ -20,7 +20,7 @@ fux::RoundGraph::RoundGraph(const double rectangle_x, const double rectangle_y, 
     circle_begin = new QGraphicsEllipseItem(rectangle_small_x, rectangle_small_y, width, width);
     angle = 0;
     start_angle = 0;
-    delta_angle = 16;
+    delta_angle = 32;
     circle_end->setTransformOriginPoint((diameter / 2), (diameter / 2));
     circle->setTransformOriginPoint(rectangle_x + (diameter / 2), rectangle_y + (diameter / 2));
     circle->setStartAngle(90 * 16);
@@ -52,8 +52,7 @@ fux::RoundGraph::RoundGraph(const double rectangle_x, const double rectangle_y, 
     display_place->setGeometry(rectangle_x + (diameter / 2) - 30, rectangle_y + (diameter / 2) - 10, 60, 20);
     display_place->setText(QString::number(getAngle() / 3.6) + " %");
     display_place->setAlignment(Qt::AlignCenter);
-    display_place->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0);");
-
+    display_place->setStyleSheet("border:0px;background-color:rgba(0, 0, 0, 0);font: normal 16px;");
 }
 
 void fux::RoundGraph::setAngle(int grad) {
