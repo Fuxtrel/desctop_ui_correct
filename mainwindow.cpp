@@ -76,7 +76,5 @@ void MainWindow::resizeEvent(QResizeEvent *event) {
             setMinimumSize(1280, 780);
             break;
     }
-    if(home_page->stacked_widget_home->currentIndex() == 1){
-        home_page->template_bg->resize(event->size().width() - 274, event->size().height());
-    }
+
 }

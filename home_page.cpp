@@ -50,7 +50,6 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
 
     connect(buttons[0], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_0_push);
     connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_1_push);
-    connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_files_button_clicked);
     connect(buttons[2], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_2_push);
     connect(buttons[3], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_3_push);
     connect(buttons[4], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_4_push);
@@ -77,14 +76,6 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
     template_bg->setGeometry(274, 0, 1126, 944);
     template_bg->setStyleSheet("background-color:rgba(0, 0, 0, 0);");
 
-    stacked_widget_home = new QStackedWidget(template_bg);
-    stacked_widget_home->setGeometry(0, 0, 1126, 944);
-
-    files_page = new QWidget(template_bg);
-    files_page->setGeometry(0, 0, template_bg->size().width(), template_bg->size().height());
-    files_page->setStyleSheet("background-color:green;");
-    stacked_widget_home->addWidget(info_page);
-    stacked_widget_home->addWidget(files_page);
 
     top_block = new QWidget(info_page);
     top_block->setGeometry(0, 76, 726, 466);
@@ -361,7 +352,6 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
     right_buttons[1]->setStyleSheet("border:0px;background-color:rgba(89, 215, 171, 26);border-radius:5px;");
     right_buttons[2]->setStyleSheet("border:0px;background-color:rgba(255, 147, 141, 26);border-radius:5px;");
     right_buttons[3]->setStyleSheet("border:0px;background-color:rgba(255, 215, 94, 26);border-radius:5px;");
-    connect(right_buttons[0], &QPushButton::clicked, this, &HomePage::on_files_button_clicked);
 
 
 
@@ -523,8 +513,3 @@ void HomePage::setUsingSpace(size_t space) {
         using_space_count->setText(QString::number(size_t(space / 1e6)) + " TБ");
     }
 }
-
-void HomePage::on_files_button_clicked() {
-    stacked_widget_home->setCurrentIndex(1);
-}
-

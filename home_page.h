@@ -91,7 +91,7 @@ private slots:
     void on_command_link_button_5_push();
     void on_command_link_button_6_push();
     void on_command_link_button_7_push();
-    void on_files_button_clicked();
+
 };
 
 
