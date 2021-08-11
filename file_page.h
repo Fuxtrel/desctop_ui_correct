@@ -19,6 +19,8 @@ private:
     QGridLayout *layout;
     QStackedWidget *stacked_widget_file_out;
     QGridLayout *stacked_widget_file_layout;
+    QWidget *top_block;
+    QWidget *find_place;
 
 };
 
