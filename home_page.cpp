@@ -50,6 +50,7 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
 
     connect(buttons[0], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_0_push);
     connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_1_push);
+    connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_file_page_clicked);
     connect(buttons[2], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_2_push);
     connect(buttons[3], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_3_push);
     connect(buttons[4], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_4_push);
@@ -352,7 +353,7 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
     right_buttons[1]->setStyleSheet("border:0px;background-color:rgba(89, 215, 171, 26);border-radius:5px;");
     right_buttons[2]->setStyleSheet("border:0px;background-color:rgba(255, 147, 141, 26);border-radius:5px;");
     right_buttons[3]->setStyleSheet("border:0px;background-color:rgba(255, 215, 94, 26);border-radius:5px;");
-
+    connect(right_buttons[0], &QCommandLinkButton::clicked, this, &HomePage::on_file_page_clicked);
 
 
 }
@@ -513,3 +514,9 @@ void HomePage::setUsingSpace(size_t space) {
         using_space_count->setText(QString::number(size_t(space / 1e6)) + " TБ");
     }
 }
+
+void HomePage::on_file_page_clicked() {
+    stacked_widget->setCurrentIndex(3);
+}
+
+

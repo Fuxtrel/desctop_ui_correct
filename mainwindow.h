@@ -15,6 +15,7 @@
 #include "home_page.h"
 #include "customshadoweffect.h"
 #include "round_graph.h"
+#include "file_page.h"
 
 
 class MainWindow : public QMainWindow{
@@ -30,6 +31,7 @@ private:
     InPage *in_page;
     RegPage *reg_page;
     HomePage *home_page;
+    FilePage *file_page;
     fux::RoundGraph *rg;
     fux::RoundGraph *rg_;
     int i = 0;

@@ -13,10 +13,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     rg_ = new fux::RoundGraph(graphics_begin_x + 200 + diameter, 89, diameter, 10, QBrush(QColor::fromRgb(89, 215, 171)), QBrush(Qt::white), home_page->top_block);
     in_page = new InPage(this, stacked_widget, rg, rg_);
     reg_page = new RegPage(this, stacked_widget);
+    file_page = new FilePage(this, stacked_widget);
 
     stacked_widget->addWidget(reg_page->getLinkBgRegPage());
     stacked_widget->addWidget(in_page->bg_in_page);
     stacked_widget->addWidget(home_page->bg_home_page);
+    stacked_widget->addWidget((file_page->bg_file_page));
 
     auto *bodyShadow = new CustomShadowEffect();
     bodyShadow->setBlurRadius(20.0);
