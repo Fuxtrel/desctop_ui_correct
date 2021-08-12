@@ -144,9 +144,9 @@ InPage::InPage(QWidget *parent, QStackedWidget *stacked_widget, fux::RoundGraph 
         email = json["email"].toString();
         password = json["password"].toString();
         QIcon check_point_on;
-        check_point_on.addFile(QString::fromUtf8("../pictures/in_page/check_box_point.svg"), QSize(), QIcon::Normal,
+        check_point_on.addFile(QString::fromUtf8("../pictures/reg_page/check_mark.svg"), QSize(), QIcon::Normal,
                                QIcon::On);
-        check_box_in_page->setIconSize(QSize(8, 8));
+        check_box_in_page->setIconSize(QSize(14, 16));
         check_box_in_page->setIcon(check_point_on);
         check_box_in_page_state = json["check_box"].toBool();
     }
