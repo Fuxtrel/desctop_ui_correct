@@ -7,6 +7,8 @@
 #include <QScrollArea>
 #include <QCommandLinkButton>
 #include <QSvgWidget>
+#include <QGroupBox>
+#include <QLabel>
 
 class FilePage : public QObject {
     Q_OBJECT
@@ -19,14 +21,22 @@ public:
 private:
     QSvgWidget *logo;
     QStackedWidget *stacked_widget;
-    QScrollArea *scroll_area_file;
+
     QWidget *left_buttons_block;
     QGridLayout *layout;
+
+    QWidget *top_block;
+    QWidget *find_place;
+
+    QWidget *bottom_block;
+    QGridLayout *bottom_block_layout;
+    QLabel *file_area_name;
+    QGroupBox *button_group;
     QStackedWidget *stacked_widget_file_out;
     QGridLayout *stacked_widget_file_layout;
-    QWidget *top_block;
-    QWidget *bottom_block;
-    QWidget *find_place;
+    QScrollArea *scroll_area_file;
+
+
     void setButtonsDefault();
 
 private slots:
