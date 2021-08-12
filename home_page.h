@@ -8,12 +8,13 @@
 #include <QtSvg/QtSvg>
 #include <QProgressBar>
 #include <QScrollArea>
+#include "file_page.h"
 
 class HomePage : public QObject {
 Q_OBJECT
 
 public:
-    HomePage(QWidget *parent = nullptr, QStackedWidget *stacked_widget = nullptr);
+    HomePage(QWidget *parent, QStackedWidget *stacked_widget, FilePage *file_page);
 
     ~HomePage() = default;
 
@@ -27,15 +28,17 @@ public:
     QLabel *out_email;
     QStackedWidget *stacked_widget_home;
     QWidget *template_bg;
+    QCommandLinkButton *buttons[8];
+    std::vector<bool> buttons_state = {false, false, false, false, false, false, false, false};
 
 private:
+    FilePage *file_page;
     QWidget *home_page;
     QGridLayout *home_layout;
     QWidget *left_buttons_group;
     QSvgWidget *logo;
     QSvgWidget *separator;
-    QCommandLinkButton *buttons[8];
-    bool buttons_state[8] = {false};
+
     QSvgWidget *separator_b;
     QLabel *last_files;
     QStackedWidget *stacked_widget;

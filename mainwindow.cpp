@@ -8,12 +8,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     stacked_widget->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     int graphics_begin_x = 139;
     int diameter = 128;
-    home_page = new HomePage(this, stacked_widget);
+    file_page = new FilePage(this, stacked_widget);
+    home_page = new HomePage(this, stacked_widget, file_page);
     rg = new fux::RoundGraph(graphics_begin_x, 89, diameter, 10, QBrush(QColor::fromRgb(134, 143, 255)), QBrush(Qt::white), home_page->top_block);
     rg_ = new fux::RoundGraph(graphics_begin_x + 200 + diameter, 89, diameter, 10, QBrush(QColor::fromRgb(89, 215, 171)), QBrush(Qt::white), home_page->top_block);
     in_page = new InPage(this, stacked_widget, rg, rg_);
     reg_page = new RegPage(this, stacked_widget);
-    file_page = new FilePage(this, stacked_widget);
+
 
     stacked_widget->addWidget(reg_page->getLinkBgRegPage());
     stacked_widget->addWidget(in_page->bg_in_page);

@@ -1,6 +1,6 @@
 #include "home_page.h"
 
-HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widget(stacked_widget){
+HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget, FilePage *file_page):stacked_widget(stacked_widget), file_page(file_page){
     bg_home_page = new QWidget(parent);
     bg_home_page->setStyleSheet("background-color:#F7F9FB;");
 
@@ -50,7 +50,6 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
 
     connect(buttons[0], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_0_push);
     connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_1_push);
-    connect(buttons[1], &QCommandLinkButton::clicked, this, &HomePage::on_file_page_clicked);
     connect(buttons[2], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_2_push);
     connect(buttons[3], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_3_push);
     connect(buttons[4], &QCommandLinkButton::clicked, this, &HomePage::on_command_link_button_4_push);
@@ -355,148 +354,159 @@ HomePage::HomePage(QWidget *parent, QStackedWidget *stacked_widget):stacked_widg
     right_buttons[3]->setStyleSheet("border:0px;background-color:rgba(255, 215, 94, 26);border-radius:5px;");
     connect(right_buttons[0], &QCommandLinkButton::clicked, this, &HomePage::on_file_page_clicked);
 
+    buttons[0]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    QIcon icon;
+    icon.addFile("../pictures/home_page/but_blue_0");
+    buttons[0]->setIcon(icon);
 
 }
 
 void HomePage::on_command_link_button_0_push() {
-    setButtonsDefault();
+//    setButtonsDefault();
     if(!buttons_state[0]) {
-        buttons[0]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
-        QIcon icon;
-        icon.addFile("../pictures/home_page/but_blue_0");
-        buttons[0]->setIcon(icon);
-        buttons_state[0] = true;
+//        file_page->buttons[0]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+//        QIcon icon;
+//        icon.addFile("../pictures/home_page/but_blue_0");
+//        buttons[0]->setIcon(icon);
+//        buttons_state[0] = true;
     }else{
-        buttons[0]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
-        QIcon icon;
-        icon.addFile("../pictures/home_page/but_0");
-        buttons[0]->setIcon(icon);
-        buttons_state[0] = false;
+//        buttons[0]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+//        QIcon icon;
+//        icon.addFile("../pictures/home_page/but_0");
+//        buttons[0]->setIcon(icon);
+//        buttons_state[0] = false;
     }
+
 }
 
 void HomePage::on_command_link_button_1_push() {
-    setButtonsDefault();
-    if(!buttons_state[1]) {
-        buttons[1]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+//    setButtonsDefault();
+    if(!file_page->buttons_state[1]) {
+        file_page->buttons[1]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_1");
-        buttons[1]->setIcon(icon);
-        buttons_state[1] = true;
+        file_page->buttons[1]->setIcon(icon);
+        file_page->buttons_state[1] = true;
     }else{
-        buttons[1]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[1]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_1");
-        buttons[1]->setIcon(icon);
-        buttons_state[1] = false;
+        file_page->buttons[1]->setIcon(icon);
+        file_page->buttons_state[1] = false;
     }
-
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_2_push() {
     setButtonsDefault();
-    if(!buttons_state[2]) {
-        buttons[2]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[2]) {
+        file_page->buttons[2]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_2");
-        buttons[2]->setIcon(icon);
-        buttons_state[2] = true;
+        file_page->buttons[2]->setIcon(icon);
+        file_page->buttons_state[2] = true;
     }else{
-        buttons[2]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[2]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_2");
-        buttons[2]->setIcon(icon);
-        buttons_state[2] = false;
+        file_page->buttons[2]->setIcon(icon);
+        file_page->buttons_state[2] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_3_push() {
     setButtonsDefault();
-    if(!buttons_state[3]) {
-        buttons[3]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[3]) {
+        file_page->buttons[3]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_3");
-        buttons[3]->setIcon(icon);
-        buttons_state[3] = true;
+        file_page->buttons[3]->setIcon(icon);
+        file_page->buttons_state[3] = true;
     }else{
         buttons[3]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_3");
-        buttons[3]->setIcon(icon);
-        buttons_state[3] = false;
+        file_page->buttons[3]->setIcon(icon);
+        file_page->buttons_state[3] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_4_push() {
     setButtonsDefault();
-    if(!buttons_state[4]) {
-        buttons[4]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[4]) {
+        file_page->buttons[4]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_4");
-        buttons[4]->setIcon(icon);
-        buttons_state[4] = true;
+        file_page->buttons[4]->setIcon(icon);
+        file_page->buttons_state[4] = true;
     }else{
-        buttons[4]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[4]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_4");
-        buttons[4]->setIcon(icon);
-        buttons_state[4] = false;
+        file_page->buttons[4]->setIcon(icon);
+        file_page->buttons_state[4] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_5_push() {
     setButtonsDefault();
-    if(!buttons_state[5]) {
-        buttons[5]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[5]) {
+        file_page->buttons[5]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_5");
-        buttons[5]->setIcon(icon);
-        buttons_state[5] = true;
+        file_page->buttons[5]->setIcon(icon);
+        file_page->buttons_state[5] = true;
     }else{
-        buttons[5]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[5]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_5");
-        buttons[5]->setIcon(icon);
-        buttons_state[5] = false;
+        file_page->buttons[5]->setIcon(icon);
+        file_page->buttons_state[5] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_6_push() {
     setButtonsDefault();
-    if(!buttons_state[6]) {
-        buttons[6]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[6]) {
+        file_page->buttons[6]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_6");
-        buttons[6]->setIcon(icon);
-        buttons_state[6] = true;
+        file_page->buttons[6]->setIcon(icon);
+        file_page->buttons_state[6] = true;
     }else{
-        buttons[6]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[6]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_6");
-        buttons[6]->setIcon(icon);
-        buttons_state[6] = false;
+        file_page->buttons[6]->setIcon(icon);
+        file_page->buttons_state[6] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::on_command_link_button_7_push() {
     setButtonsDefault();
-    if(!buttons_state[7]) {
-        buttons[7]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
+    if(!file_page->buttons_state[7]) {
+        file_page->buttons[7]->setStyleSheet("border:0px;background-color:#F1F8FE;color:#70BBF6;font: bold 17px;border-radius:7px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_blue_7");
-        buttons[7]->setIcon(icon);
-        buttons_state[7] = true;
+        file_page->buttons[7]->setIcon(icon);
+        file_page->buttons_state[7] = true;
     }else{
-        buttons[7]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
+        file_page->buttons[7]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_7");
-        buttons[7]->setIcon(icon);
-        buttons_state[7] = false;
+        file_page->buttons[7]->setIcon(icon);
+        file_page->buttons_state[7] = false;
     }
+    stacked_widget->setCurrentIndex(3);
 }
 
 void HomePage::setButtonsDefault() {
-    for(int i = 0; i < 8; i++){
+    for(int i = 1; i < 8; i++){
         buttons[i]->setStyleSheet("border:0px;background-color:white;color:#9C9C9C;font: normal 17px;");
         QIcon icon;
         icon.addFile("../pictures/home_page/but_" + QString::number(i));
